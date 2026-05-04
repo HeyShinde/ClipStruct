@@ -1,0 +1,30 @@
+# macOS
+.DS_Store
+*.swp
+*~
+
+# Xcode
+build/
+DerivedData/
+*.xcuserdata
+*.xcworkspace/xcuserdata/
+*.pbxuser
+*.mode1v3
+*.mode2v3
+*.perspectivev3
+*.moved-aside
+*.hmap
+*.ipa
+
+# IDE
+.idea/
+.vscode/
+
+# Website (Next.js) - paths relative to website/
+website/node_modules/
+website/.next/
+website/out/
+website/.vercel
+website/.env*
+website/*.tsbuildinfo
+website/next-env.d.ts
