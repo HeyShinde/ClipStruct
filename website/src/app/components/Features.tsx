@@ -99,7 +99,7 @@ export default function Features() {
                         Powerful. <span className="gradient-text">Private. Precise.</span>
                     </h2>
                     <p className="text-lg text-slate-400 max-w-2xl mx-auto">
-                        Built for professionals who copy a lot and can't afford to lose track of their work.
+                        Built for professionals who copy a lot and can&apos;t afford to lose track of their work.
                     </p>
                 </motion.div>
 

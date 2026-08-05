@@ -74,7 +74,7 @@ export default function Download() {
                         </div>
 
                         {/* What's included */}
-                        <h4 className="text-sm font-semibold text-slate-300 mb-4 uppercase tracking-wider">What's included</h4>
+                        <h4 className="text-sm font-semibold text-slate-300 mb-4 uppercase tracking-wider">What&apos;s included</h4>
                         <div className="grid grid-cols-1 sm:grid-cols-2 gap-2.5 mb-8">
                             {included.map(item => (
                                 <div key={item} className="flex items-center gap-2.5 text-sm text-slate-300">
@@ -140,7 +140,7 @@ export default function Download() {
                                 <h4 className="text-sm font-semibold text-slate-300 uppercase tracking-wider">Security Notice</h4>
                             </div>
                             <p className="text-sm text-slate-400 leading-relaxed">
-                                ClipStruct is not Apple-notarized (we're indie). On first launch, right-click → <strong className="text-slate-300">Open</strong>, or go to System Settings → Privacy & Security → <strong className="text-slate-300">Open Anyway</strong>.
+                                ClipStruct is not Apple-notarized (we&apos;re indie). On first launch, right-click → <strong className="text-slate-300">Open</strong>, or go to System Settings → Privacy & Security → <strong className="text-slate-300">Open Anyway</strong>.
                             </p>
                         </motion.div>
                     </div>

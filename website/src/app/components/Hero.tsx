@@ -1,9 +1,8 @@
 'use client'
 
 import { motion } from 'framer-motion'
-import { LuDownload, LuGithub, LuStar, LuSparkle } from 'react-icons/lu'
+import { LuDownload, LuGithub, LuSparkle } from 'react-icons/lu'
 import Link from 'next/link'
-import Image from 'next/image'
 
 const stats = [
     { value: '500+', label: 'Items Stored' },
