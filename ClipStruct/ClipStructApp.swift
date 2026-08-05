@@ -107,7 +107,11 @@ class AppDelegate: NSObject, NSApplicationDelegate {
                 customIcon.isTemplate = true
                 button.image = customIcon
             } else {
-                button.image = NSImage(systemSymbolName: "doc.on.clipboard", accessibilityDescription: "Clipboard")
+                if let fallback = NSImage(systemSymbolName: "doc.on.clipboard", accessibilityDescription: "Clipboard") {
+                    fallback.size = NSSize(width: 18, height: 18)
+                    fallback.isTemplate = true
+                    button.image = fallback
+                }
             }
             
             button.action = #selector(togglePopover)
@@ -161,6 +165,7 @@ class AppDelegate: NSObject, NSApplicationDelegate {
         guard let button = statusBarItem?.button else { return }
         
         if let checkmarkImage = NSImage(systemSymbolName: "checkmark.circle.fill", accessibilityDescription: "Copied") {
+            checkmarkImage.size = NSSize(width: 18, height: 18)
             checkmarkImage.isTemplate = true
             button.image = checkmarkImage
         }
@@ -173,6 +178,7 @@ class AppDelegate: NSObject, NSApplicationDelegate {
                 button.image = customIcon
             } else {
                 if let fallback = NSImage(systemSymbolName: "doc.on.clipboard", accessibilityDescription: "Clipboard") {
+                    fallback.size = NSSize(width: 18, height: 18)
                     fallback.isTemplate = true
                     button.image = fallback
                 }
