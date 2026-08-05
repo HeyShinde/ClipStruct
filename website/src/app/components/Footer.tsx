@@ -1,86 +1,113 @@
 'use client'
 
 import Link from 'next/link'
-import { LuGithub, LuHeart, LuTwitter, LuMail } from 'react-icons/lu'
-import Image from "next/image";
+import Image from 'next/image'
+import { LuGithub, LuHeart, LuTwitter, LuMail, LuArrowUpRight } from 'react-icons/lu'
+
+const links = {
+    Product: [
+        { label: 'Features', href: '#features' },
+        { label: 'Download', href: '#download' },
+        { label: 'Privacy', href: '#privacy' },
+        { label: 'Release Notes', href: 'https://github.com/HeyShinde/ClipStruct/releases' },
+    ],
+    Support: [
+        { label: 'Bug Reports', href: 'https://github.com/HeyShinde/ClipStruct/issues', external: true },
+        { label: 'Feature Requests', href: 'https://github.com/HeyShinde/ClipStruct/discussions', external: true },
+        { label: 'Source Code', href: 'https://github.com/HeyShinde/ClipStruct', external: true },
+    ],
+}
+
+const socials = [
+    { icon: LuGithub, label: 'GitHub', href: 'https://github.com/HeyShinde/ClipStruct' },
+    { icon: LuHeart, label: 'Sponsor', href: 'https://github.com/sponsors/HeyShinde' },
+    { icon: LuTwitter, label: 'Twitter', href: 'https://twitter.com/HeyShinde' },
+    { icon: LuMail, label: 'Email', href: 'mailto:clipstruct@heyshinde.com' },
+]
 
 export default function Footer() {
     return (
-        <footer className="bg-slate-900/80 border-t border-white/10 py-12">
-            <div className="container mx-auto px-6">
-                <div className="grid grid-cols-1 md:grid-cols-4 gap-8">
-                    {/* Brand */}
-                    <div>
-                        <div className="flex items-center space-x-2 mb-4">
-                            <div className="w-8 h-8 ">
-                                <Image src="/icon.png" width={100} height={100} alt="Clip Struct" />
+        <footer className="border-t border-white/[0.06] mt-20">
+            <div className="max-w-6xl mx-auto px-6 pt-16 pb-10">
+                <div className="grid grid-cols-1 md:grid-cols-4 gap-12 mb-16">
+                    {/* Brand column */}
+                    <div className="md:col-span-1">
+                        <Link href="/" className="flex items-center gap-2.5 mb-4 group w-fit">
+                            <div className="w-8 h-8 rounded-lg overflow-hidden ring-1 ring-white/10">
+                                <Image src="/icon.png" width={32} height={32} alt="ClipStruct" className="w-full h-full object-cover" />
                             </div>
-                            <span className="text-xl font-bold">ClipStruct</span>
-                        </div>
-                        <p className="text-slate-400 text-sm leading-relaxed">
-                            The ultimate clipboard manager for macOS. Built with privacy and productivity in mind.
+                            <span className="font-bold text-white">ClipStruct</span>
+                        </Link>
+                        <p className="text-sm text-slate-500 leading-relaxed mb-6">
+                            The premium macOS clipboard manager. Built by an indie developer, for power users.
                         </p>
+                        {/* Social icons */}
+                        <div className="flex items-center gap-3">
+                            {socials.map(s => (
+                                <Link
+                                    key={s.label}
+                                    href={s.href}
+                                    target="_blank"
+                                    aria-label={s.label}
+                                    className="w-8 h-8 rounded-lg bg-white/[0.04] border border-white/[0.07] flex items-center justify-center text-slate-500 hover:text-white hover:bg-white/[0.08] hover:border-violet-500/30 transition-all"
+                                >
+                                    <s.icon size={15} />
+                                </Link>
+                            ))}
+                        </div>
                     </div>
 
-                    {/* Product */}
-                    <div>
-                        <h4 className="font-semibold mb-4">Product</h4>
-                        <ul className="space-y-2 text-sm text-slate-400">
-                            <li><Link href="#features" className="hover:text-white transition-colors">Features</Link></li>
-                            <li><Link href="#download" className="hover:text-white transition-colors">Download</Link></li>
-                            <li><Link href="#" className="hover:text-white transition-colors">Release Notes</Link></li>
-                            <li><Link href="#" className="hover:text-white transition-colors">System Requirements</Link></li>
-                        </ul>
-                    </div>
+                    {/* Link columns */}
+                    {Object.entries(links).map(([category, items]) => (
+                        <div key={category}>
+                            <h4 className="text-xs font-semibold text-slate-300 uppercase tracking-widest mb-5">{category}</h4>
+                            <ul className="flex flex-col gap-3">
+                                {items.map(item => (
+                                    <li key={item.label}>
+                                        <Link
+                                            href={item.href}
+                                            target={'external' in item && item.external ? '_blank' : undefined}
+                                            className="text-sm text-slate-500 hover:text-white transition-colors flex items-center gap-1 group"
+                                        >
+                                            {item.label}
+                                            {'external' in item && item.external && (
+                                                <LuArrowUpRight size={12} className="opacity-0 group-hover:opacity-100 transition-opacity" />
+                                            )}
+                                        </Link>
+                                    </li>
+                                ))}
+                            </ul>
+                        </div>
+                    ))}
 
-                    {/* Support */}
+                    {/* Sponsor CTA */}
                     <div>
-                        <h4 className="font-semibold mb-4">Support</h4>
-                        <ul className="space-y-2 text-sm text-slate-400">
-                            <li><Link href="https://github.com/HeyShinde/ClipStruct/issues" className="hover:text-white transition-colors">Bug Reports</Link></li>
-                            <li><Link href="https://github.com/HeyShinde/ClipStruct/discussions" className="hover:text-white transition-colors">Feature Requests</Link></li>
-                            <li><Link href="#" className="hover:text-white transition-colors">Privacy Policy</Link></li>
-                            <li><Link href="#" className="hover:text-white transition-colors">Terms of Service</Link></li>
-                        </ul>
-                    </div>
-
-                    {/* Connect */}
-                    <div>
-                        <h4 className="font-semibold mb-4">Connect</h4>
-                        <ul className="space-y-2 text-sm text-slate-400">
-                            <li>
-                                <Link href="https://github.com/HeyShinde/ClipStruct" className="hover:text-white transition-colors flex items-center space-x-2">
-                                    <LuGithub size={16} />
-                                    <span>GitHub</span>
-                                </Link>
-                            </li>
-                            <li>
-                                <Link href="https://github.com/sponsors/HeyShinde" className="hover:text-white transition-colors flex items-center space-x-2">
-                                    <LuHeart size={16} />
-                                    <span>Sponsor</span>
-                                </Link>
-                            </li>
-                            <li>
-                                <Link href="https://twitter.com/HeyShinde" className="hover:text-white transition-colors flex items-center space-x-2">
-                                    <LuTwitter size={16} />
-                                    <span>Twitter</span>
-                                </Link>
-                            </li>
-                            <li>
-                                <Link href="mailto:clipstruct@heyshinde.com" className="hover:text-white transition-colors flex items-center space-x-2">
-                                    <LuMail size={16} />
-                                    <span>Email</span>
-                                </Link>
-                            </li>
-                        </ul>
+                        <h4 className="text-xs font-semibold text-slate-300 uppercase tracking-widest mb-5">Support the project</h4>
+                        <p className="text-sm text-slate-500 mb-4">ClipStruct is free forever. If it saves you time, consider supporting development.</p>
+                        <Link
+                            href="https://buymeacoffee.com/heyshinde"
+                            target="_blank"
+                            className="btn-ghost inline-flex items-center gap-2 text-sm !py-2 !px-4"
+                        >
+                            <LuHeart size={14} className="text-pink-400" />
+                            Buy me a coffee
+                        </Link>
                     </div>
                 </div>
 
-                <div className="border-t border-white/10 mt-12 pt-8 flex flex-col md:flex-row items-center justify-between">
-                    <p className="text-slate-400 text-sm">
-                        © 2025 ClipStruct <Link className="text-blue-400" href={"https://www.heyshinde.com"}>(HeyShinde)</Link>. Made with ❤️ for the macOS community.
+                {/* Divider */}
+                <div className="divider mb-8" />
+
+                {/* Bottom bar */}
+                <div className="flex flex-col md:flex-row items-center justify-between gap-4">
+                    <p className="text-xs text-slate-600">
+                        © 2026 ClipStruct by{' '}
+                        <Link href="https://heyshinde.com" target="_blank" className="hover:text-slate-400 transition-colors">
+                            HeyShinde
+                        </Link>
+                        . Made with ❤️ for the macOS community.
                     </p>
-                    <p className="text-slate-400 text-sm mt-4 md:mt-0">
+                    <p className="text-xs text-slate-700">
                         All data stays on your Mac. Privacy first, always.
                     </p>
                 </div>

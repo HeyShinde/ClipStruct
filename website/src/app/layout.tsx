@@ -1,48 +1,40 @@
 import type { Metadata } from 'next'
+import { Inter } from 'next/font/google'
 import './globals.css'
 
+const inter = Inter({ subsets: ['latin'], variable: '--font-inter' })
+
 export const metadata: Metadata = {
-    title: 'ClipStruct - The Ultimate macOS Clipboard Manager',
-    description: 'A powerful, privacy-focused clipboard manager for macOS. Store 100+ items, use global hotkeys, and never lose important clipboard content again.',
-    keywords: 'clipboard manager, macOS, productivity, clipboard history, copy paste',
-    authors: [{ name: 'ClipStruct Team' }],
+    title: 'ClipStruct — Premium macOS Clipboard Manager',
+    description: 'The most intelligent clipboard manager for macOS. Beautiful UI, lightning-fast search, smart categorization, and complete privacy. Free forever.',
+    keywords: 'clipboard manager, macOS, productivity, clipboard history, copy paste, menu bar app',
+    authors: [{ name: 'HeyShinde' }],
     openGraph: {
-        title: 'ClipStruct - The Ultimate macOS Clipboard Manager',
-        description: 'A powerful, privacy-focused clipboard manager for macOS. Store 100+ items, use global hotkeys, and never lose important clipboard content again.',
-        url: 'https://clipstruct.heyshinde.com',
+        title: 'ClipStruct — Premium macOS Clipboard Manager',
+        description: 'The most intelligent clipboard manager for macOS. Beautiful UI, lightning-fast search, smart categorization, and complete privacy.',
+        url: 'https://clipstruct.shindeaditya.com',
         siteName: 'ClipStruct',
-        images: [
-            {
-                url: '/app-screenshot.png',
-                width: 1200,
-                height: 630,
-                alt: 'ClipStruct App Screenshot',
-            },
-        ],
+        images: [{ url: '/og.png', width: 1200, height: 630, alt: 'ClipStruct' }],
         locale: 'en_US',
         type: 'website',
     },
     twitter: {
         card: 'summary_large_image',
-        title: 'ClipStruct - The Ultimate macOS Clipboard Manager',
-        description: 'A powerful, privacy-focused clipboard manager for macOS.',
-        images: ['/app-screenshot.png'],
+        title: 'ClipStruct — Premium macOS Clipboard Manager',
+        description: 'The most intelligent clipboard manager for macOS.',
+        images: ['/og.png'],
     },
 }
 
-export default function RootLayout({
-                                       children,
-                                   }: {
-    children: React.ReactNode
-}) {
+export default function RootLayout({ children }: { children: React.ReactNode }) {
     return (
-        <html lang="en">
-        <head>
-            <link rel="icon" href="favicon.ico" sizes="any" />
-        </head>
-        <body className="bg-gradient-to-br from-slate-900 via-blue-900 to-slate-900 text-white min-h-screen">
-        {children}
-        </body>
+        <html lang="en" className={inter.variable}>
+            <head>
+                <link rel="icon" href="favicon.ico" sizes="any" />
+            </head>
+            <body className="antialiased">
+                {children}
+            </body>
         </html>
     )
 }

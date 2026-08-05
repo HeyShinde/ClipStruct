@@ -134,6 +134,7 @@ class ClipboardMonitor: ObservableObject {
         }
         
         saveItems()
+        showStatusBarFeedback()
     }
     
     func clearAll() {

@@ -2,102 +2,129 @@
 
 import { motion } from 'framer-motion'
 import {
-    LuClipboard,
-    LuSearch,
-    LuKeyboard,
-    LuShield,
-    LuZap,
-    LuMonitor,
-    LuClock,
-    LuSettings,
-    LuEye
+    LuSearch, LuKeyboard, LuShield,
+    LuZap, LuMonitor, LuImage, LuLink, LuPalette, LuEye
 } from 'react-icons/lu'
 
 const features = [
     {
-        icon: LuClipboard,
-        title: '100 Item History',
-        description: 'Never lose important clipboard content with automatic history tracking up to 100 items.'
+        icon: LuZap,
+        title: 'Instant Capture',
+        description: 'Copies appear in your history the moment you press ⌘C. No lag, no delay — it\'s always watching.',
+        color: 'text-yellow-400',
+        bg: 'bg-yellow-500/10',
     },
     {
         icon: LuSearch,
-        title: 'Lightning Fast Search',
-        description: 'Find any clipboard item instantly with fuzzy search. Auto-focus for seamless workflow.'
+        title: 'Universal Search',
+        description: 'Search by content or source app. Find anything in milliseconds, even by the app you copied it from.',
+        color: 'text-blue-400',
+        bg: 'bg-blue-500/10',
+    },
+    {
+        icon: LuImage,
+        title: 'Images & Visuals',
+        description: 'Copy screenshots, photos, and graphics. ClipStruct stores them with smart thumbnail generation.',
+        color: 'text-purple-400',
+        bg: 'bg-purple-500/10',
+    },
+    {
+        icon: LuLink,
+        title: 'Link Detection',
+        description: 'URLs are automatically detected and displayed as rich link cards — clean and easy to navigate.',
+        color: 'text-cyan-400',
+        bg: 'bg-cyan-500/10',
+    },
+    {
+        icon: LuPalette,
+        title: 'Color Swatches',
+        description: 'Hex codes are recognized and shown as beautiful color swatches. Designers will love this.',
+        color: 'text-pink-400',
+        bg: 'bg-pink-500/10',
+    },
+    {
+        icon: LuShield,
+        title: 'Privacy by Design',
+        description: 'Zero network access. Zero telemetry. All data lives exclusively on your Mac. Forever.',
+        color: 'text-green-400',
+        bg: 'bg-green-500/10',
     },
     {
         icon: LuKeyboard,
         title: 'Global Hotkeys',
-        description: 'Use ⌘1-⌘9 to copy your most recent items without even opening the app.'
-    },
-    {
-        icon: LuShield,
-        title: '100% Private',
-        description: 'All data stays on your Mac. No network access, no tracking, no data collection.'
-    },
-    {
-        icon: LuZap,
-        title: 'Smart Deduplication',
-        description: 'Automatically handles duplicate content intelligently, keeping your history clean.'
+        description: 'Summon ClipStruct instantly from anywhere with your custom keyboard shortcut.',
+        color: 'text-violet-400',
+        bg: 'bg-violet-500/10',
     },
     {
         icon: LuMonitor,
-        title: 'Menu Bar Integration',
-        description: 'Lives quietly in your menu bar with visual feedback and status indicators.'
-    },
-    {
-        icon: LuClock,
-        title: 'Auto-Launch',
-        description: 'Starts automatically when you log in. Can be easily disabled in preferences.'
-    },
-    {
-        icon: LuSettings,
-        title: 'Customizable Shortcuts',
-        description: 'Modify keyboard shortcuts to fit your workflow perfectly.'
+        title: 'Menu Bar Native',
+        description: 'Lives quietly in your menu bar. No Dock icon, no clutter. Just there when you need it.',
+        color: 'text-indigo-400',
+        bg: 'bg-indigo-500/10',
     },
     {
         icon: LuEye,
-        title: 'Dark/Light Mode',
-        description: 'Seamlessly adapts to your system appearance preferences.'
-    }
+        title: 'Smart Deduplication',
+        description: 'Copy something twice? It simply floats to the top instead of cluttering your history.',
+        color: 'text-orange-400',
+        bg: 'bg-orange-500/10',
+    },
 ]
+
+const container = {
+    hidden: {},
+    visible: { transition: { staggerChildren: 0.07 } }
+}
+
+const item = {
+    hidden: { opacity: 0, y: 20 },
+    visible: { opacity: 1, y: 0, transition: { duration: 0.5, ease: [0.22, 1, 0.36, 1] as [number, number, number, number] } }
+}
 
 export default function Features() {
     return (
-        <section id="features" className="py-20 relative">
-            <div className="container mx-auto px-6">
+        <section id="features" className="section-padding relative">
+            <div className="max-w-6xl mx-auto px-6">
+                {/* Header */}
                 <motion.div
-                    initial={{ opacity: 0, y: 20 }}
+                    initial={{ opacity: 0, y: 24 }}
                     whileInView={{ opacity: 1, y: 0 }}
-                    transition={{ duration: 0.8 }}
                     viewport={{ once: true }}
-                    className="text-center mb-16"
+                    transition={{ duration: 0.6 }}
+                    className="text-center mb-20"
                 >
-                    <h2 className="text-4xl md:text-5xl font-bold mb-6">
-                        Powerful Features for{' '}
-                        <span className="gradient-text">Power Users</span>
+                    <span className="badge mb-6 inline-flex">Everything you need</span>
+                    <h2 className="text-4xl md:text-5xl font-bold tracking-tight mb-5">
+                        Powerful. <span className="gradient-text">Private. Precise.</span>
                     </h2>
-                    <p className="text-xl text-slate-300 max-w-3xl mx-auto">
-                        ClipStruct is packed with features designed to supercharge your productivity
-                        while keeping your data private and secure.
+                    <p className="text-lg text-slate-400 max-w-2xl mx-auto">
+                        Built for professionals who copy a lot and can't afford to lose track of their work.
                     </p>
                 </motion.div>
 
-                <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-                    {features.map((feature, index) => (
+                {/* Feature grid */}
+                <motion.div
+                    variants={container}
+                    initial="hidden"
+                    whileInView="visible"
+                    viewport={{ once: true, amount: 0.1 }}
+                    className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4"
+                >
+                    {features.map((feature) => (
                         <motion.div
                             key={feature.title}
-                            initial={{ opacity: 0, y: 20 }}
-                            whileInView={{ opacity: 1, y: 0 }}
-                            transition={{ duration: 0.6, delay: index * 0.1 }}
-                            viewport={{ once: true }}
-                            className="glass-effect rounded-xl p-6 hover:bg-white/20 transition-all duration-300 group"
+                            variants={item}
+                            className="glass rounded-2xl p-6 group cursor-default"
                         >
-                            <feature.icon className="w-12 h-12 text-primary-400 mb-4 group-hover:scale-110 transition-transform duration-300" />
-                            <h3 className="text-xl font-semibold mb-3">{feature.title}</h3>
-                            <p className="text-slate-400 leading-relaxed">{feature.description}</p>
+                            <div className={`inline-flex items-center justify-center w-11 h-11 rounded-xl ${feature.bg} mb-4 transition-transform duration-300 group-hover:scale-110`}>
+                                <feature.icon className={`${feature.color} icon-glow`} size={22} />
+                            </div>
+                            <h3 className="text-base font-semibold text-white mb-2">{feature.title}</h3>
+                            <p className="text-sm text-slate-400 leading-relaxed">{feature.description}</p>
                         </motion.div>
                     ))}
-                </div>
+                </motion.div>
             </div>
         </section>
     )
