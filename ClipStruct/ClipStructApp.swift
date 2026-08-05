@@ -5,8 +5,6 @@ import KeyboardShortcuts
 @main
 struct ClipStructApp: App {
     @NSApplicationDelegateAdaptor(AppDelegate.self) var appDelegate
-    @StateObject private var clipboardManager = ClipboardManager()
-    @StateObject private var preferencesManager = PreferencesManager()
     
     var body: some Scene {
         Settings {
@@ -18,7 +16,7 @@ struct ClipStructApp: App {
 class AppDelegate: NSObject, NSApplicationDelegate {
     var statusBarItem: NSStatusItem!
     var popover: NSPopover!
-    var clipboardManager: ClipboardManager!
+    var clipboardMonitor: ClipboardMonitor!
     var preferencesManager: PreferencesManager!
     
     func applicationDidFinishLaunching(_ aNotification: Notification) {
@@ -26,11 +24,13 @@ class AppDelegate: NSObject, NSApplicationDelegate {
         NSApp.setActivationPolicy(.accessory)
         
         // Initialize managers
-        clipboardManager = ClipboardManager()
         preferencesManager = PreferencesManager()
+        clipboardMonitor = ClipboardMonitor(preferencesManager: preferencesManager)
         
         // Set delegate reference for auto-closing popover
-        clipboardManager.appDelegate = self
+        clipboardMonitor.onPopoverCloseRequest = { [weak self] in
+            self?.closePopoverWithDelay(0.5)
+        }
         
         // Setup status bar
         setupStatusBar()
@@ -48,12 +48,12 @@ class AppDelegate: NSObject, NSApplicationDelegate {
         }
         
         // Start clipboard monitoring
-        clipboardManager.startMonitoring()
+        clipboardMonitor.startMonitoring()
     }
     
     func applicationWillTerminate(_ aNotification: Notification) {
         // Stop monitoring and save data before quitting
-        clipboardManager.stopMonitoring()
+        clipboardMonitor.stopMonitoring()
     }
     
     private func setupGlobalToggle() {
@@ -87,8 +87,8 @@ class AppDelegate: NSObject, NSApplicationDelegate {
         popover.contentSize = NSSize(width: 350, height: 500)
         popover.behavior = .transient
         popover.contentViewController = NSHostingController(
-            rootView: ContentView()
-                .environmentObject(clipboardManager)
+            rootView: MainView()
+                .environmentObject(clipboardMonitor)
                 .environmentObject(preferencesManager)
         )
     }

@@ -36,22 +36,22 @@ export default function DownloadSection() {
                             <div className="flex items-center space-x-4 mb-6 lg:mb-0">
                                     <Image src="/icon.png" width={100} height={100} alt="Clip Struct" />
                                 <div>
-                                    <h3 className="text-2xl font-bold">ClipStruct v1.0.0</h3>
-                                    <p className="text-slate-400">For macOS 15.0 (Sonoma) and later</p>
-                                    <p className="text-sm text-primary-400">Free • 5.6 MB • Universal Binary</p>
+                                    <h3 className="text-2xl font-bold">ClipStruct v2.0.0</h3>
+                                    <p className="text-slate-400">For macOS 14.0 (Sonoma) and later</p>
+                                    <p className="text-sm text-primary-400">Free • Universal Binary</p>
                                 </div>
                             </div>
 
                             <div className="flex flex-col sm:flex-row space-y-3 sm:space-y-0 sm:space-x-4">
                                 <Link
-                                    href="https://github.com/HeyShinde/ClipStruct/releases/download/v1.0.0/ClipStruct-1.0.0.dmg"
+                                    href="https://github.com/HeyShinde/ClipStruct/releases/download/v2.0.0/ClipStruct-2.0.0.dmg"
                                     className="btn-primary flex items-center space-x-2"
                                 >
                                     <LuDownload size={20} />
                                     <span>Download DMG</span>
                                 </Link>
                                 <Link
-                                    href="https://github.com/HeyShinde/ClipStruct/releases/tag/v1.0.0"
+                                    href="https://github.com/HeyShinde/ClipStruct/releases/tag/v2.0.0"
                                     className="btn-secondary flex items-center space-x-2"
                                 >
                                     <LuGithub size={20} />
@@ -77,7 +77,7 @@ export default function DownloadSection() {
                             <ol className="space-y-3 text-slate-300">
                                 <li className="flex items-start space-x-3">
                                     <span className="bg-primary-500 text-white rounded-full w-6 h-6 flex items-center justify-center text-sm font-bold flex-shrink-0 mt-0.5">1</span>
-                                    <span>Download ClipStruct-1.0.0.dmg</span>
+                                    <span>Download ClipStruct-2.0.0.dmg</span>
                                 </li>
                                 <li className="flex items-start space-x-3">
                                     <span className="bg-primary-500 text-white rounded-full w-6 h-6 flex items-center justify-center text-sm font-bold flex-shrink-0 mt-0.5">2</span>

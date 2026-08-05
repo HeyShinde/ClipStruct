@@ -32,16 +32,13 @@ struct ToastModifier: ViewModifier {
     let message: String
     
     func body(content: Content) -> some View {
-        ZStack {
+        ZStack(alignment: .bottom) {
             content
             
             if isShowing {
-                VStack {
-                    Spacer()
-                    ToastView(message: message, isVisible: isShowing)
-                    Spacer().frame(height: 50)
-                }
-                .transition(.move(edge: .bottom).combined(with: .opacity))
+                ToastView(message: message, isVisible: isShowing)
+                    .padding(.bottom, 50)
+                    .transition(.move(edge: .bottom).combined(with: .opacity))
             }
         }
     }
