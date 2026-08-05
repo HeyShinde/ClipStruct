@@ -4,6 +4,7 @@ import ServiceManagement
 class PreferencesManager: ObservableObject {
     @Published var isLoginItem: Bool = false
     @AppStorage("ignorePasswords") var ignorePasswords: Bool = true
+    @AppStorage("enableGlobalShortcuts") var enableGlobalShortcuts: Bool = false
     
     init() {
         checkLoginItemStatus()

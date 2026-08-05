@@ -41,7 +41,7 @@ export default function Hero() {
                 >
                     <span className="badge">
                         <LuSparkle size={12} className="text-violet-400" />
-                        Version 2.0.0 is here — Rebuilt from scratch
+                        Version 2.0.1 is here — Rebuilt from scratch
                     </span>
                 </motion.div>
 
@@ -74,7 +74,7 @@ export default function Hero() {
                     className="flex flex-wrap items-center justify-center gap-4 mb-16"
                 >
                     <Link
-                        href="https://github.com/HeyShinde/ClipStruct/releases/download/v2.0.0/ClipStruct-2.0.0.dmg"
+                        href="https://github.com/HeyShinde/ClipStruct/releases/download/v2.0.1/ClipStruct-2.0.1.dmg"
                         className="btn-primary flex items-center gap-2.5 text-base !py-3.5 !px-7"
                     >
                         <LuDownload size={18} />

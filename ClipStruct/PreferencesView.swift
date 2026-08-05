@@ -56,6 +56,19 @@ struct PreferencesView: View {
                         .foregroundColor(.secondary)
                         .fixedSize(horizontal: false, vertical: true)
                 }
+                
+                Divider()
+                
+                // Global Shortcuts
+                VStack(alignment: .leading, spacing: 6) {
+                    Toggle("Enable Global Shortcuts (Cmd+1 to Cmd+9)", isOn: $preferencesManager.enableGlobalShortcuts)
+                    .toggleStyle(.checkbox)
+                    
+                    Text("Allows pasting from clipboard history while the app is in the background. Note: This overrides default app shortcuts.")
+                        .font(.caption)
+                        .foregroundColor(.secondary)
+                        .fixedSize(horizontal: false, vertical: true)
+                }
             }
             .padding(20)
         }

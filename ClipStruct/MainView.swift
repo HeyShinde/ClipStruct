@@ -8,6 +8,7 @@ struct MainView: View {
     @State private var selectedCategory: ItemCategory = .all
     @FocusState private var isSearchFocused: Bool
     @State private var isShowingPreferences = false
+    @State private var showClearConfirmation = false
     
     let columns = [
         GridItem(.adaptive(minimum: 250, maximum: 350), spacing: 16)
@@ -21,14 +22,22 @@ struct MainView: View {
             return item.category == selectedCategory
         }
         
+        var result: [ClipboardItem]
         if searchText.isEmpty {
-            return filteredByCategory
+            result = filteredByCategory
         } else {
-            return filteredByCategory.filter { item in
+            result = filteredByCategory.filter { item in
                 let contentMatch = item.content.localizedCaseInsensitiveContains(searchText)
                 let appMatch = item.sourceAppName?.localizedCaseInsensitiveContains(searchText) ?? false
                 return contentMatch || appMatch
             }
+        }
+        
+        return result.sorted {
+            if $0.isPinned == $1.isPinned {
+                return $0.timestamp > $1.timestamp
+            }
+            return $0.isPinned && !$1.isPinned
         }
     }
     
@@ -104,7 +113,7 @@ struct MainView: View {
                     
                     Spacer(minLength: 16)
                     
-                    Button(action: { clipboardMonitor.clearAll() }) {
+                    Button(action: { showClearConfirmation = true }) {
                         HStack(spacing: 4) {
                             Image(systemName: "trash")
                             Text("Clear")
@@ -116,6 +125,14 @@ struct MainView: View {
                         .cornerRadius(6)
                     }
                     .buttonStyle(.plain)
+                    .alert("Clear All Items?", isPresented: $showClearConfirmation) {
+                        Button("Cancel", role: .cancel) { }
+                        Button("Clear All", role: .destructive) {
+                            clipboardMonitor.clearAll()
+                        }
+                    } message: {
+                        Text("Are you sure you want to delete all unpinned items? This action cannot be undone.")
+                    }
                 }
                 .padding()
                 .background(Color(NSColor.windowBackgroundColor))
@@ -136,8 +153,8 @@ struct MainView: View {
                         .frame(maxWidth: .infinity)
                     } else {
                         LazyVGrid(columns: columns, spacing: 16) {
-                            ForEach(filteredItems) { item in
-                                ItemCardView(item: item) {
+                            ForEach(Array(filteredItems.enumerated()), id: \.element.id) { index, item in
+                                ItemCardView(item: item, shortcutNumber: index < 9 ? index + 1 : nil) {
                                     clipboardMonitor.copyItem(item)
                                 }
                             }

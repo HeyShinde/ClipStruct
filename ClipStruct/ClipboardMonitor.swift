@@ -15,8 +15,9 @@ class ClipboardMonitor: ObservableObject {
     // Dependencies
     private let preferencesManager: PreferencesManager
     
-    // Popover closing helper
+    // Callbacks
     var onPopoverCloseRequest: (() -> Void)?
+    var onShowFeedback: (() -> Void)?
     
     init(preferencesManager: PreferencesManager) {
         self.preferencesManager = preferencesManager
@@ -134,11 +135,12 @@ class ClipboardMonitor: ObservableObject {
         }
         
         saveItems()
-        showStatusBarFeedback()
+        onShowFeedback?()
     }
     
     func clearAll() {
-        for item in items {
+        let itemsToRemove = items.filter { !$0.isPinned }
+        for item in itemsToRemove {
             if let path = item.imagePath {
                 deleteImage(at: path)
             }
@@ -146,22 +148,30 @@ class ClipboardMonitor: ObservableObject {
                 deleteImage(at: thumb)
             }
         }
-        items.removeAll()
+        items.removeAll { !$0.isPinned }
         saveItems()
     }
     
-    func delete(at offsets: IndexSet) {
-        for index in offsets {
-            let item = items[index]
-            if let path = item.imagePath {
+    // MARK: - Pin & Delete Helpers
+    func togglePin(_ item: ClipboardItem) {
+        if let index = items.firstIndex(where: { $0.id == item.id }) {
+            items[index].isPinned.toggle()
+            saveItems()
+        }
+    }
+    
+    func deleteItem(_ item: ClipboardItem) {
+        if let index = items.firstIndex(where: { $0.id == item.id }) {
+            // Remove any attached image files
+            if let path = items[index].imagePath {
                 deleteImage(at: path)
             }
-            if let thumb = item.thumbnailPath {
+            if let thumb = items[index].thumbnailPath {
                 deleteImage(at: thumb)
             }
+            items.remove(at: index)
+            saveItems()
         }
-        items.remove(atOffsets: offsets)
-        saveItems()
     }
     
     func copyItem(_ item: ClipboardItem) {
@@ -190,12 +200,13 @@ class ClipboardMonitor: ObservableObject {
             
             // Re-order to top
             if let idx = self.items.firstIndex(where: { $0.id == item.id }) {
-                let copiedItem = self.items.remove(at: idx)
+                var copiedItem = self.items.remove(at: idx)
+                copiedItem.timestamp = Date()
                 self.items.insert(copiedItem, at: 0)
                 self.saveItems()
             }
             
-            self.showStatusBarFeedback()
+            self.onShowFeedback?()
             self.onPopoverCloseRequest?()
         }
     }
@@ -285,22 +296,5 @@ class ClipboardMonitor: ObservableObject {
         }
     }
     
-    // MARK: - Status Bar Feedback
-    
-    private func showStatusBarFeedback() {
-        if let appDelegate = NSApp.delegate as? AppDelegate,
-           let button = appDelegate.statusBarItem?.button {
-            button.image = NSImage(systemSymbolName: "checkmark.circle.fill", accessibilityDescription: "Copied")
-            
-            DispatchQueue.main.asyncAfter(deadline: .now() + 1.0) {
-                if let customIcon = NSImage(named: "menuIcon") {
-                    customIcon.size = NSSize(width: 18, height: 18)
-                    customIcon.isTemplate = true
-                    button.image = customIcon
-                } else {
-                    button.image = NSImage(systemSymbolName: "doc.on.clipboard", accessibilityDescription: "Clipboard")
-                }
-            }
-        }
-    }
+
 }

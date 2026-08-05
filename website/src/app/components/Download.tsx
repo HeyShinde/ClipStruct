@@ -6,8 +6,8 @@ import Link from 'next/link'
 import Image from 'next/image'
 
 const steps = [
-    { step: '1', text: 'Download ClipStruct-2.0.0.dmg' },
-    { step: '2', text: 'Open the DMG and drag to Applications' },
+    { step: '1', text: 'Download ClipStruct-2.0.1.dmg' },
+    { step: '2', text: 'Open the DMG and drag ClipStruct to Applications' },
     { step: '3', text: 'Right-click → Open on first launch' },
     { step: '4', text: 'Click the menu bar icon and start copying!' },
 ]
@@ -64,9 +64,9 @@ export default function Download() {
                                 <Image src="/icon.png" width={80} height={80} alt="ClipStruct" className="w-full h-full object-cover" />
                             </div>
                             <div>
-                                <div className="flex items-center gap-2 mb-1">
-                                    <h3 className="text-xl font-bold text-white">ClipStruct</h3>
-                                    <span className="badge !text-xs !py-0.5 !px-2">v2.0.0</span>
+                                <div className="flex items-center gap-3 mb-2">
+                                    <h3 className="text-xl font-semibold text-white">macOS</h3>
+                                    <span className="badge !text-xs !py-0.5 !px-2">v2.0.1</span>
                                 </div>
                                 <p className="text-sm text-slate-400 mb-1">For macOS 14.0 Sonoma and later</p>
                                 <p className="text-xs text-slate-600">2.6 MB • Universal Binary • Free</p>
@@ -87,14 +87,14 @@ export default function Download() {
                         {/* Download buttons */}
                         <div className="flex flex-col sm:flex-row gap-3">
                             <Link
-                                href="https://github.com/HeyShinde/ClipStruct/releases/download/v2.0.0/ClipStruct-2.0.0.dmg"
+                                href="https://github.com/HeyShinde/ClipStruct/releases/download/v2.0.1/ClipStruct-2.0.1.dmg"
                                 className="btn-primary flex items-center justify-center gap-2.5 flex-1 !py-3.5"
                             >
                                 <LuDownload size={18} />
                                 Download DMG
                             </Link>
                             <Link
-                                href="https://github.com/HeyShinde/ClipStruct/releases/tag/v2.0.0"
+                                href="https://github.com/HeyShinde/ClipStruct/releases/tag/v2.0.1"
                                 target="_blank"
                                 className="btn-ghost flex items-center justify-center gap-2.5 flex-1 !py-3.5"
                             >

@@ -27,9 +27,14 @@ class AppDelegate: NSObject, NSApplicationDelegate {
         preferencesManager = PreferencesManager()
         clipboardMonitor = ClipboardMonitor(preferencesManager: preferencesManager)
         
-        // Set delegate reference for auto-closing popover
+        // Set delegate references
         clipboardMonitor.onPopoverCloseRequest = { [weak self] in
             self?.closePopoverWithDelay(0.5)
+        }
+        clipboardMonitor.onShowFeedback = { [weak self] in
+            DispatchQueue.main.async {
+                self?.showStatusBarFeedback()
+            }
         }
         
         // Setup status bar
@@ -60,6 +65,34 @@ class AppDelegate: NSObject, NSApplicationDelegate {
         KeyboardShortcuts.onKeyDown(for: .toggleClipboard) { [weak self] in
             DispatchQueue.main.async {
                 self?.togglePopover()
+            }
+        }
+        
+        let shortcuts: [KeyboardShortcuts.Name] = [
+            .copyItem1, .copyItem2, .copyItem3, .copyItem4, .copyItem5,
+            .copyItem6, .copyItem7, .copyItem8, .copyItem9
+        ]
+        
+        for (index, shortcut) in shortcuts.enumerated() {
+            KeyboardShortcuts.onKeyDown(for: shortcut) { [weak self] in
+                DispatchQueue.main.async {
+                    guard let self = self,
+                          let monitor = self.clipboardMonitor,
+                          self.preferencesManager.enableGlobalShortcuts else { return }
+                    
+                    // Get filtered/sorted items conceptually, but since background we just use the raw items
+                    // Wait, we should sort by pinned first, then timestamp to match the UI!
+                    let sortedItems = monitor.items.sorted {
+                        if $0.isPinned == $1.isPinned {
+                            return $0.timestamp > $1.timestamp
+                        }
+                        return $0.isPinned && !$1.isPinned
+                    }
+                    
+                    if index < sortedItems.count {
+                        monitor.copyItem(sortedItems[index])
+                    }
+                }
             }
         }
     }
@@ -119,6 +152,31 @@ class AppDelegate: NSObject, NSApplicationDelegate {
     func closePopoverWithDelay(_ delay: TimeInterval = 0.3) {
         DispatchQueue.main.asyncAfter(deadline: .now() + delay) { [weak self] in
             self?.closePopover()
+        }
+    }
+    
+    // MARK: - Status Bar Feedback
+    
+    func showStatusBarFeedback() {
+        guard let button = statusBarItem?.button else { return }
+        
+        if let checkmarkImage = NSImage(systemSymbolName: "checkmark.circle.fill", accessibilityDescription: "Copied") {
+            checkmarkImage.isTemplate = true
+            button.image = checkmarkImage
+        }
+        
+        DispatchQueue.main.asyncAfter(deadline: .now() + 2.0) { [weak self] in
+            guard let self = self, let button = self.statusBarItem?.button else { return }
+            if let customIcon = NSImage(named: "menuIcon") {
+                customIcon.size = NSSize(width: 18, height: 18)
+                customIcon.isTemplate = true
+                button.image = customIcon
+            } else {
+                if let fallback = NSImage(systemSymbolName: "doc.on.clipboard", accessibilityDescription: "Clipboard") {
+                    fallback.isTemplate = true
+                    button.image = fallback
+                }
+            }
         }
     }
 }

@@ -18,12 +18,16 @@ struct ClipboardItem: Identifiable, Codable {
     // Pre-computed hex color if category == .color
     var hexColorString: String?
     
+    // Pin flag – true if the user has pinned this item
+    var isPinned: Bool = false
+    
     init(content: String, imagePath: String? = nil, thumbnailPath: String? = nil, sourceBundleID: String? = nil, sourceName: String? = nil) {
         self.content = content
         self.imagePath = imagePath
         self.thumbnailPath = thumbnailPath
         self.sourceAppBundleID = sourceBundleID
         self.sourceAppName = sourceName
+        self.isPinned = false
         
         let trimmed = content.trimmingCharacters(in: .whitespacesAndNewlines)
         
