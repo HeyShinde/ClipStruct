@@ -12,7 +12,7 @@
 
 ---
 
-ClipStruct sits silently in your menu bar and remembers everything you copy — text, images, links, and colors — so you never have to. Completely rebuilt for version 2.0.0 with a lightning-fast native engine and a beautiful new interface.
+ClipStruct sits silently in your menu bar and remembers everything you copy — text, images, links, and colors — so you never have to. Completely rebuilt for version 2.0 with a lightning-fast native engine and a beautiful new interface.
 
 ## ✨ Features
 
@@ -37,7 +37,7 @@ ClipStruct sits silently in your menu bar and remembers everything you copy — 
 ClipStruct is a native macOS application optimized for Apple Silicon and Intel Macs running macOS 14.0 or later.
 
 1. Go to the [Releases page](https://github.com/HeyShinde/ClipStruct/releases/latest).
-2. Download the latest `ClipStruct-2.0.0.dmg`.
+2. Download the latest `ClipStruct-2.0.2.dmg`.
 3. Open the DMG and drag ClipStruct to your Applications folder.
 4. Launch the app and grant Accessibility permissions when prompted (required for global hotkeys and clipboard reading).
 5. *Note: Since ClipStruct is an indie app, you may need to Right-click → **Open** on the first launch to bypass Gatekeeper.*
