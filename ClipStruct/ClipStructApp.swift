@@ -162,6 +162,13 @@ class AppDelegate: NSObject, NSApplicationDelegate {
     // MARK: - Status Bar Feedback
     
     func showStatusBarFeedback() {
+        // If the popover is currently open, changing the menubar icon causes an AppKit bug 
+        // where the popover loses its anchor and violently jumps to the left edge of the screen.
+        // Since the popover already shows a green checkmark on the item itself, we can just skip this.
+        if popover != nil && popover.isShown {
+            return
+        }
+        
         guard let button = statusBarItem?.button else { return }
         
         if let checkmarkImage = NSImage(systemSymbolName: "checkmark.circle.fill", accessibilityDescription: "Copied") {
