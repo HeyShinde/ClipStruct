@@ -12,24 +12,68 @@ struct ItemCardView: View {
     @State private var showCopiedIndicator = false
     
     var body: some View {
-        cardContent
-            .background(
-                Group {
-                    if let num = shortcutNumber {
-                        Button("") { handleCopy() }
-                            .keyboardShortcut(KeyEquivalent(Character("\(num)")), modifiers: .command)
-                            .opacity(0)
-                    }
-                }
-            )
-            .alert("Delete Item?", isPresented: $showDeleteConfirmation) {
-                Button("Cancel", role: .cancel) { }
-                Button("Delete", role: .destructive) {
-                    clipboardMonitor.deleteItem(item)
-                }
-            } message: {
-                Text("Are you sure you want to delete this copied item?")
+        ZStack {
+            // Background copy button
+            Button(action: handleCopy) {
+                Color(NSColor.controlBackgroundColor)
+                    .contentShape(Rectangle())
             }
+            .buttonStyle(.plain)
+            
+            // Foreground content
+            cardContent
+        }
+        .frame(maxWidth: .infinity, maxHeight: .infinity)
+        .cornerRadius(12)
+        .overlay(
+            RoundedRectangle(cornerRadius: 12)
+                .stroke(isHovered ? Color.blue.opacity(0.5) : Color.primary.opacity(0.1), lineWidth: 1)
+        )
+        .shadow(color: Color.black.opacity(isHovered ? 0.1 : 0.05), radius: isHovered ? 4 : 2, x: 0, y: isHovered ? 2 : 1)
+        .scaleEffect(isHovered ? 1.01 : 1.0)
+        .animation(.spring(response: 0.2, dampingFraction: 0.7), value: isHovered)
+        .onHover { hovering in
+            isHovered = hovering
+            if hovering {
+                NSCursor.pointingHand.push()
+            } else {
+                NSCursor.pop()
+            }
+        }
+        .overlay(
+            Group {
+                if showCopiedIndicator {
+                    ZStack {
+                        Color.black.opacity(0.15)
+                            .cornerRadius(12)
+                        
+                        Image(systemName: "checkmark.circle.fill")
+                            .font(.system(size: 48))
+                            .foregroundColor(.green)
+                            .shadow(radius: 4)
+                    }
+                    .frame(maxWidth: .infinity, maxHeight: .infinity)
+                    .transition(.opacity.combined(with: .scale))
+                }
+            }
+        )
+        .background(
+            Group {
+                if let num = shortcutNumber {
+                    Button("") { handleCopy() }
+                        .keyboardShortcut(KeyEquivalent(Character("\(num)")), modifiers: .command)
+                        .opacity(0)
+                }
+            }
+        )
+        .alert("Delete Item?", isPresented: $showDeleteConfirmation) {
+            Button("Cancel", role: .cancel) { }
+            Button("Delete", role: .destructive) {
+                clipboardMonitor.deleteItem(item)
+            }
+        } message: {
+            Text("Are you sure you want to delete this copied item?")
+        }
     }
     
     private func handleCopy() {
@@ -68,7 +112,7 @@ struct ItemCardView: View {
                             .foregroundColor(item.isPinned ? .yellow : .secondary)
                             .font(.system(size: 11))
                     }
-                    .buttonStyle(.plain)
+                    .buttonStyle(.borderless)
                     .padding(.trailing, 4)
                 }
                 
@@ -80,7 +124,7 @@ struct ItemCardView: View {
                             .foregroundColor(.red.opacity(0.8))
                             .font(.system(size: 11))
                     }
-                    .buttonStyle(.plain)
+                    .buttonStyle(.borderless)
                     .padding(.trailing, 4)
                 }
                 
@@ -160,43 +204,7 @@ struct ItemCardView: View {
                         .padding()
                 }
             }
-        }
-        .contentShape(Rectangle())
-        .background(Color(NSColor.controlBackgroundColor))
-        .cornerRadius(12)
-        .overlay(
-            RoundedRectangle(cornerRadius: 12)
-                .stroke(isHovered ? Color.blue.opacity(0.5) : Color.primary.opacity(0.1), lineWidth: 1)
-        )
-        .shadow(color: Color.black.opacity(isHovered ? 0.1 : 0.05), radius: isHovered ? 4 : 2, x: 0, y: isHovered ? 2 : 1)
-        .scaleEffect(isHovered ? 1.01 : 1.0)
-        .animation(.spring(response: 0.2, dampingFraction: 0.7), value: isHovered)
-        .onTapGesture {
-            handleCopy()
-        }
-        .overlay(
-            Group {
-                if showCopiedIndicator {
-                    ZStack {
-                        Color.black.opacity(0.15)
-                            .cornerRadius(12)
-                        
-                        Image(systemName: "checkmark.circle.fill")
-                            .font(.system(size: 48))
-                            .foregroundColor(.green)
-                            .shadow(radius: 4)
-                    }
-                    .transition(.opacity.combined(with: .scale))
-                }
-            }
-        )
-        .onHover { hovering in
-            isHovered = hovering
-            if hovering {
-                NSCursor.pointingHand.push()
-            } else {
-                NSCursor.pop()
-            }
+            .allowsHitTesting(false)
         }
     }
     
