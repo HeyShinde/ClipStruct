@@ -1,0 +1,94 @@
+---
+const privacyPillars = [
+  {
+    title: 'Zero Network Entitlement',
+    desc: 'ClipStruct is compiled without network client entitlements. The macOS kernel itself prevents the app from opening outbound internet connections.',
+    icon: 'wifi',
+  },
+  {
+    title: 'Strictly Local Storage',
+    desc: 'Your history is stored locally in ~/Library/Application Support/ClipStruct on your Mac. You own the files and can delete them whenever you wish.',
+    icon: 'database',
+  },
+  {
+    title: 'Password Manager Immune',
+    desc: 'Auto-detects and ignores passwords copied from 1Password, Bitwarden, Proton Pass, KeePass, and respects ConcealedType pasteboard flags.',
+    icon: 'shield',
+  },
+  {
+    title: '100% Open Source Audit',
+    desc: 'Every single line of Swift and SwiftUI code is public on GitHub under the MIT license. Audit it, compile it yourself with Xcode, or fork it.',
+    icon: 'code',
+  },
+];
+---
+
+<section id="privacy" class="py-20 md:py-28 relative">
+  <div class="max-w-6xl mx-auto px-6">
+    <div class="glass rounded-3xl overflow-hidden border border-white/10 glow-subtle">
+      <div class="grid grid-cols-1 lg:grid-cols-12 gap-0">
+        <!-- Left Statement (5 cols) -->
+        <div class="lg:col-span-5 p-8 sm:p-12 lg:p-14 flex flex-col justify-between bg-gradient-to-br from-emerald-950/20 via-transparent to-transparent">
+          <div>
+            <div class="inline-flex items-center gap-2 mb-6 text-xs font-semibold px-3 py-1.5 rounded-full bg-emerald-500/15 border border-emerald-500/30 text-emerald-300">
+              <span class="w-2 h-2 rounded-full bg-emerald-400 animate-pulse"></span>
+              Confidentiality First
+            </div>
+            <h2 class="text-3xl sm:text-4xl font-black tracking-tight text-white mb-5 leading-tight">
+              Your clipboard is <br />
+              <span class="gradient-text-accent">nobody else's business.</span>
+            </h2>
+            <p class="text-slate-300 text-sm sm:text-base leading-relaxed mb-8">
+              We built ClipStruct with an uncompromising principle: <strong class="text-white">no data ever leaves your Mac</strong>. No tracking telemetry, no analytics SDKs, no cloud sync, and zero hidden network pings.
+            </p>
+          </div>
+
+          <div class="p-4 rounded-xl bg-black/40 border border-emerald-500/30 flex items-center gap-3 text-xs text-emerald-300">
+            <svg class="w-5 h-5 text-emerald-400 shrink-0" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+              <path stroke-linecap="round" stroke-linejoin="round" d="M9 12l2 2 4-4m5.618-4.016A11.955 11.955 0 0112 2.944a11.955 11.955 0 01-8.618 3.04A12.02 12.02 0 003 9c0 5.591 3.824 10.29 9 11.622 5.176-1.332 9-6.03 9-11.622 0-1.042-.133-2.052-.382-3.016z" />
+            </svg>
+            <div>
+              <div class="font-bold text-white">Apple App Sandbox Verified</div>
+              <div class="text-slate-400 text-[11px]">0 Outbound Network Sockets Configured</div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Right Pillars Grid (7 cols) -->
+        <div class="lg:col-span-7 border-t lg:border-t-0 lg:border-l border-white/[0.08] p-8 sm:p-12 lg:p-14 grid grid-cols-1 sm:grid-cols-2 gap-6 bg-white/[0.01]">
+          {privacyPillars.map((p) => (
+            <div class="p-5 rounded-2xl bg-white/[0.02] border border-white/[0.06] hover:border-emerald-500/30 transition-all flex flex-col justify-between">
+              <div>
+                <div class="w-10 h-10 rounded-xl bg-emerald-500/10 border border-emerald-500/20 flex items-center justify-center text-emerald-400 mb-4">
+                  {p.icon === 'wifi' && (
+                    <svg class="w-5 h-5" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+                      <path stroke-linecap="round" stroke-linejoin="round" d="M18.364 5.636a9 9 0 010 12.728m0 0l-2.829-2.829m2.829 2.829L21 21M15.536 8.464a5 5 0 010 7.072m0 0l-2.829-2.829m-4.243 2.829a4.978 4.978 0 01-1.414-2.83m-1.414 5.658a9 9 0 01-2.167-9.238m7.824 2.167a1 1 0 111.414 1.414m-1.414-1.414L3 3" />
+                    </svg>
+                  )}
+                  {p.icon === 'database' && (
+                    <svg class="w-5 h-5" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+                      <path stroke-linecap="round" stroke-linejoin="round" d="M4 7v10c0 2.21 3.582 4 8 4s8-1.79 8-4V7M4 7c0 2.21 3.582 4 8 4s8-1.79 8-4M4 7c0-2.21 3.582-4 8-4s8 1.79 8 4m0 5c0 2.21-3.582 4-8 4s-8-1.79-8-4" />
+                    </svg>
+                  )}
+                  {p.icon === 'shield' && (
+                    <svg class="w-5 h-5" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+                      <path stroke-linecap="round" stroke-linejoin="round" d="M12 15v2m-6 4h12a2 2 0 002-2v-6a2 2 0 00-2-2H6a2 2 0 00-2 2v6a2 2 0 002 2zm10-10V7a4 4 0 00-8 0v4h8z" />
+                    </svg>
+                  )}
+                  {p.icon === 'code' && (
+                    <svg class="w-5 h-5" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+                      <path stroke-linecap="round" stroke-linejoin="round" d="M10 20l4-16m4 4l4 4-4 4M6 16l-4-4 4-4" />
+                    </svg>
+                  )}
+                </div>
+                <h3 class="text-base font-bold text-white mb-2">{p.title}</h3>
+                <p class="text-xs text-slate-300 leading-relaxed">{p.desc}</p>
+              </div>
+            </div>
+          ))}
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+

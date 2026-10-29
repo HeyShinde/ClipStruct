@@ -1,0 +1,101 @@
+---
+import Layout from '../layouts/Layout.astro';
+import Header from '../components/Header.astro';
+import Footer from '../components/Footer.astro';
+---
+
+<Layout
+  title="Privacy Policy — ClipStruct"
+  description="ClipStruct Privacy Policy: 100% on-device clipboard manager with zero network access, zero tracking, and zero telemetry."
+>
+  <Header />
+
+  <main class="pt-32 pb-20 max-w-4xl mx-auto px-6">
+    <div class="mb-12">
+      <span class="badge-pill mb-4 inline-flex">Legal &amp; Privacy</span>
+      <h1 class="text-4xl sm:text-5xl font-black text-white tracking-tight mb-4">
+        Privacy Policy
+      </h1>
+      <p class="text-sm text-slate-400">
+        Effective Date: October 29, 2026 • Version 2.3
+      </p>
+    </div>
+
+    <div class="glass-card rounded-3xl p-8 sm:p-12 border border-white/10 space-y-8 text-slate-300 text-sm sm:text-base leading-relaxed">
+      <section>
+        <h2 class="text-xl font-bold text-white mb-3 flex items-center gap-2">
+          <span class="w-2 h-2 rounded-full bg-emerald-400"></span>
+          1. Summary &amp; Core Commitment
+        </h2>
+        <p>
+          ClipStruct (&ldquo;the App&rdquo;), developed by Aditya Shinde (&ldquo;Developer&rdquo;), is engineered with an uncompromising privacy-by-design architecture. <strong class="text-white">ClipStruct does not collect, transmit, store, sell, or analyze any user data, personal information, or clipboard contents.</strong>
+        </p>
+      </section>
+
+      <section>
+        <h2 class="text-xl font-bold text-white mb-3 flex items-center gap-2">
+          <span class="w-2 h-2 rounded-full bg-violet-400"></span>
+          2. Clipboard Data &amp; Local Storage
+        </h2>
+        <p>
+          When you copy items (text, code, links, images, hex colors), ClipStruct stores this history strictly in your Mac&apos;s local application container (<code class="text-violet-300 font-mono text-xs bg-white/5 px-2 py-1 rounded">~/Library/Application Support/ClipStruct</code> or your sandboxed application container).
+        </p>
+        <ul class="list-disc list-inside mt-3 space-y-2 text-slate-400">
+          <li>Your clipboard contents never leave your physical device.</li>
+          <li>No cloud servers, sync relays, or third-party databases are utilized.</li>
+          <li>You can delete your history at any time directly through the app or by deleting the local database.</li>
+        </ul>
+      </section>
+
+      <section>
+        <h2 class="text-xl font-bold text-white mb-3 flex items-center gap-2">
+          <span class="w-2 h-2 rounded-full bg-cyan-400"></span>
+          3. Zero Network Entitlements
+        </h2>
+        <p>
+          ClipStruct does not request or possess any outbound network entitlements in its Apple App Sandbox configuration. The application is technically incapable of establishing connections to the internet, sending telemetry, or communicating with remote servers.
+        </p>
+      </section>
+
+      <section>
+        <h2 class="text-xl font-bold text-white mb-3 flex items-center gap-2">
+          <span class="w-2 h-2 rounded-full bg-pink-400"></span>
+          4. Password Manager &amp; Sensitive Data Protection
+        </h2>
+        <p>
+          ClipStruct actively honors Apple&apos;s standard <code class="text-pink-300 font-mono text-xs bg-white/5 px-2 py-1 rounded">org.nspasteboard.ConcealedType</code> pasteboard flag and implements automated exclusions for popular password managers including 1Password, Bitwarden, Proton Pass, KeePass, and MacPass. Content marked as sensitive is never saved or recorded in your clipboard history.
+        </p>
+      </section>
+
+      <section>
+        <h2 class="text-xl font-bold text-white mb-3 flex items-center gap-2">
+          <span class="w-2 h-2 rounded-full bg-amber-400"></span>
+          5. Analytics, Tracking &amp; Cookies
+        </h2>
+        <p>
+          ClipStruct contains zero analytics SDKs, zero crash tracking frameworks (such as Firebase, Sentry, or Google Analytics), and zero advertising trackers. The promotional website at <a href="https://clipstruct.shindeaditya.com" class="text-violet-300 hover:underline">clipstruct.shindeaditya.com</a> does not set tracking cookies.
+        </p>
+      </section>
+
+      <section>
+        <h2 class="text-xl font-bold text-white mb-3 flex items-center gap-2">
+          <span class="w-2 h-2 rounded-full bg-blue-400"></span>
+          6. Open Source Transparency
+        </h2>
+        <p>
+          ClipStruct is licensed under the MIT License and its source code is publicly accessible on GitHub at <a href="https://github.com/HeyShinde/ClipStruct" target="_blank" rel="noopener noreferrer" class="text-violet-300 hover:underline">github.com/HeyShinde/ClipStruct</a>. You can inspect every pasteboard interaction and verify our security claims independently.
+        </p>
+      </section>
+
+      <section class="pt-4 border-t border-white/[0.08]">
+        <h2 class="text-xl font-bold text-white mb-2">7. Contact &amp; Questions</h2>
+        <p class="text-slate-400">
+          If you have questions regarding this Privacy Policy, please open an issue on GitHub or email <a href="mailto:aditya@shindeaditya.com" class="text-violet-300 hover:underline">aditya@shindeaditya.com</a>.
+        </p>
+      </section>
+    </div>
+  </main>
+
+  <Footer />
+</Layout>
+

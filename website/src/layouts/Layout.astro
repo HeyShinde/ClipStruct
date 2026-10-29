@@ -1,0 +1,138 @@
+---
+import '../styles/global.css';
+
+interface Props {
+  title?: string;
+  description?: string;
+  image?: string;
+}
+
+const siteUrl = 'https://clipstruct.shindeaditya.com';
+const canonicalUrl = new URL(Astro.url.pathname, siteUrl).href;
+
+const {
+  title = 'ClipStruct — Premium Native macOS Clipboard Manager',
+  description = 'ClipStruct is a lightning-fast, native macOS clipboard manager. Store text, images, colors, code, and links with instant global hotkey search, smart categorization, zero telemetry, and 100% on-device privacy.',
+  image = `${siteUrl}/og-image.svg`,
+} = Astro.props;
+
+const jsonLd = {
+  '@context': 'https://schema.org',
+  '@graph': [
+    {
+      '@type': 'WebSite',
+      '@id': `${siteUrl}/#website`,
+      url: siteUrl,
+      name: 'ClipStruct',
+      description: 'Premium native macOS clipboard manager for enhanced productivity.',
+      publisher: {
+        '@type': 'Person',
+        name: 'Shinde Aditya',
+        url: 'https://www.shindeaditya.com',
+      },
+      inLanguage: 'en-US',
+    },
+    {
+      '@type': 'SoftwareApplication',
+      '@id': `${siteUrl}/#application`,
+      name: 'ClipStruct',
+      headline: 'Premium Native macOS Clipboard Manager',
+      operatingSystem: 'macOS 14.0 or later',
+      applicationCategory: 'UtilitiesApplication',
+      applicationSubCategory: 'Clipboard Manager',
+      offers: {
+        '@type': 'Offer',
+        price: '0',
+        priceCurrency: 'USD',
+        availability: 'https://schema.org/InStock',
+      },
+      description:
+        'ClipStruct sits silently in your macOS menu bar and remembers everything you copy — text, images, links, code, and colors. Features global hotkeys, instant fuzzy search, and zero network telemetry.',
+      url: siteUrl,
+      downloadUrl: 'https://github.com/HeyShinde/ClipStruct/releases/latest',
+      screenshot: `${siteUrl}/og-image.svg`,
+      softwareVersion: '2.3',
+      author: {
+        '@type': 'Person',
+        name: 'Aditya Shinde',
+        url: 'https://www.shindeaditya.com',
+      },
+    },
+  ],
+};
+---
+
+<!doctype html>
+<html lang="en" class="scroll-smooth">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="theme-color" content="#050508" />
+    
+    <!-- Primary Meta Tags -->
+    <title>{title}</title>
+    <meta name="title" content={title} />
+    <meta name="description" content={description} />
+    <link rel="canonical" href={canonicalUrl} />
+
+    <!-- Keywords & Author -->
+    <meta name="keywords" content="ClipStruct, macOS clipboard manager, mac clipboard history, clipboard manager Mac, native Swift macOS app, clipboard organizer, menu bar app, copy paste history Mac, privacy focused clipboard manager, HeyShinde, Aditya Shinde" />
+    <meta name="author" content="Aditya Shinde" />
+    <meta name="creator" content="Aditya Shinde" />
+    <meta name="publisher" content="Aditya Shinde" />
+
+    <!-- Open Graph / Facebook -->
+    <meta property="og:type" content="website" />
+    <meta property="og:url" content={canonicalUrl} />
+    <meta property="og:title" content={title} />
+    <meta property="og:description" content={description} />
+    <meta property="og:image" content={image} />
+    <meta property="og:site_name" content="ClipStruct" />
+    <meta property="og:locale" content="en_US" />
+
+    <!-- Twitter -->
+    <meta property="twitter:card" content="summary_large_image" />
+    <meta property="twitter:url" content={canonicalUrl} />
+    <meta property="twitter:title" content={title} />
+    <meta property="twitter:description" content={description} />
+    <meta property="twitter:image" content={image} />
+    <meta property="twitter:creator" content="@HeyShinde" />
+
+    <!-- Favicon & Icons -->
+    <link rel="icon" type="image/x-icon" href="/favicon.ico" />
+    <link rel="apple-touch-icon" href="/icon.png" />
+
+    <!-- Structured Data (JSON-LD) -->
+    <script type="application/ld+json" set:html={JSON.stringify(jsonLd)} />
+  </head>
+  <body class="bg-[#050508] text-slate-100 antialiased selection:bg-violet-600/30 selection:text-violet-200">
+    <slot />
+
+    <!-- Toast Notification Container -->
+    <div id="toast-container" aria-live="polite"></div>
+
+    <script is:inline>
+      // Global toast helper
+      window.showToast = function(message) {
+        const container = document.getElementById('toast-container');
+        if (!container) return;
+        
+        const toast = document.createElement('div');
+        toast.className = 'toast';
+        toast.innerHTML = `
+          <svg class="w-4 h-4 text-violet-400 shrink-0" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2.5">
+            <path stroke-linecap="round" stroke-linejoin="round" d="M5 13l4 4L19 7" />
+          </svg>
+          <span>${message}</span>
+        `;
+        container.appendChild(toast);
+
+        setTimeout(() => {
+          toast.style.animation = 'toast-out 0.25s forwards';
+          setTimeout(() => toast.remove(), 250);
+        }, 2400);
+      };
+    </script>
+  </body>
+</html>
+

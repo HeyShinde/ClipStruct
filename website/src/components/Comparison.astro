@@ -1,0 +1,107 @@
+---
+const rows = [
+  {
+    feature: 'Price & Licensing',
+    clipstruct: '100% Free & Open Source',
+    macos: 'Built-in (Single item only)',
+    others: '$15 - $30/year subscription',
+    highlight: true,
+  },
+  {
+    feature: 'Memory (RAM) Footprint',
+    clipstruct: '< 30 MB (Native Swift)',
+    macos: '~15 MB',
+    others: '400MB - 900MB (Electron/Node)',
+    highlight: true,
+  },
+  {
+    feature: 'Network Access & Telemetry',
+    clipstruct: '0 calls (Zero network entitlement)',
+    macos: '0 calls',
+    others: 'Cloud sync & user telemetry',
+    highlight: true,
+  },
+  {
+    feature: 'Smart Swatches & Rich Links',
+    clipstruct: '✅ Automatic detection',
+    macos: '❌ Plain text only',
+    others: '⚠️ Paywalled or basic',
+    highlight: false,
+  },
+  {
+    feature: 'Search by Source App (e.g. "Safari")',
+    clipstruct: '✅ Instant millisecond filter',
+    macos: '❌ No history search',
+    others: '⚠️ Clunky or absent',
+    highlight: false,
+  },
+  {
+    feature: 'Password Manager Awareness',
+    clipstruct: '✅ Auto-excludes 1Password/Bitwarden',
+    macos: '❌ Overwritten immediately',
+    others: '⚠️ Variable support',
+    highlight: false,
+  },
+  {
+    feature: 'macOS Native Look & Feel',
+    clipstruct: '✅ Swift & SwiftUI Sonoma/Sequoia',
+    macos: '✅ Native',
+    others: '❌ Web views & sluggish animations',
+    highlight: false,
+  },
+];
+---
+
+<section id="comparison" class="py-20 md:py-28 relative border-t border-white/[0.06] bg-[#07060e]/50">
+  <div class="max-w-5xl mx-auto px-6">
+    <div class="text-center max-w-2xl mx-auto mb-16">
+      <span class="badge-pill mb-4 inline-flex">Honest Comparison</span>
+      <h2 class="text-3xl sm:text-4xl md:text-5xl font-black tracking-tight text-white mb-4">
+        Why power users <span class="gradient-text-accent">choose ClipStruct.</span>
+      </h2>
+      <p class="text-slate-400 text-sm sm:text-base">
+        Most clipboard managers are either expensive subscriptions or battery-draining Electron apps. ClipStruct is native, private, and free forever.
+      </p>
+    </div>
+
+    <!-- Comparison Table Card -->
+    <div class="rounded-2xl overflow-hidden glass border border-white/10 shadow-2xl">
+      <div class="overflow-x-auto">
+        <table class="w-full text-left text-sm border-collapse min-w-[600px]">
+          <thead>
+            <tr class="border-b border-white/10 bg-white/[0.03]">
+              <th scope="col" class="py-4 px-6 font-semibold text-slate-300 w-2/5">Capability</th>
+              <th scope="col" class="py-4 px-6 font-bold text-violet-400 bg-violet-500/10 border-x border-violet-500/20 text-center w-1/4">
+                <span class="flex items-center justify-center gap-1.5">
+                  <span class="w-2 h-2 rounded-full bg-violet-400"></span>
+                  ClipStruct
+                </span>
+              </th>
+              <th scope="col" class="py-4 px-6 font-medium text-slate-400 text-center w-1/5">macOS Default</th>
+              <th scope="col" class="py-4 px-6 font-medium text-slate-400 text-center w-1/5">Electron / Paid Apps</th>
+            </tr>
+          </thead>
+          <tbody class="divide-y divide-white/[0.06]">
+            {rows.map((row) => (
+              <tr class="hover:bg-white/[0.02] transition-colors">
+                <td class="py-4 px-6 font-medium text-white">
+                  {row.feature}
+                </td>
+                <td class="py-4 px-6 text-center font-semibold text-violet-200 bg-violet-500/[0.06] border-x border-violet-500/20">
+                  {row.clipstruct}
+                </td>
+                <td class="py-4 px-6 text-center text-slate-400">
+                  {row.macos}
+                </td>
+                <td class="py-4 px-6 text-center text-slate-400">
+                  {row.others}
+                </td>
+              </tr>
+            ))}
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </div>
+</section>
+

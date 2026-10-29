@@ -1,36 +1,64 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# ClipStruct Website
 
-## Getting Started
+The official promotional website for **[ClipStruct](https://github.com/HeyShinde/ClipStruct)** — the ultimate, privacy-first native macOS clipboard manager.
 
-First, run the development server:
+Built with [Astro](https://astro.build) and [Tailwind CSS](https://tailwindcss.com), engineered for static performance, zero runtime JavaScript bloat, and hosted globally on [Cloudflare Pages](https://pages.cloudflare.com).
 
+## 🚀 Quick Start
+
+### 1. Install dependencies
 ```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
+npm install
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+### 2. Start local development server
+```bash
+npm run dev
+```
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+Visit [http://localhost:4321](http://localhost:4321) in your browser.
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+### 3. Build for production
+```bash
+npm run build
+```
 
-## Learn More
+This generates an ultra-optimized static bundle in `dist/`.
 
-To learn more about Next.js, take a look at the following resources:
+### 4. Preview production build locally
+```bash
+npm run preview
+```
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+---
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+## ☁️ Deploying to Cloudflare Pages
 
-## Deploy on Vercel
+### Option A: Git Integration (Recommended)
+1. In the **Cloudflare Dashboard**, navigate to **Workers & Pages** → **Create application** → **Pages** → **Connect to Git**.
+2. Select the `ClipStruct` repository.
+3. Configure build settings:
+   - **Framework preset**: `Astro`
+   - **Build command**: `cd website && npm run build` (or set Root Directory to `website` with build command `npm run build`)
+   - **Build output directory**: `dist` (or `website/dist` if root dir is repository root)
+   - **Environment variables**: `NODE_VERSION`: `20` (or `22`)
+4. Click **Save and Deploy**.
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+### Option B: Cloudflare Wrangler CLI
+```bash
+# Build the project
+npm run build
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+# Deploy directly via Wrangler
+npx wrangler pages deploy dist --project-name clipstruct-website
+```
+
+---
+
+## ⚡ Performance & Optimization Highlights
+
+- **0 Framework JS Bloat**: Pure static HTML & CSS rendered at build time.
+- **Sub-300ms Build Times**: Fast Vite-based Astro compilation.
+- **Cloudflare Edge Optimized**: Custom `_headers` file providing 1-year immutable caching for assets and strict modern security headers (HSTS, CSP, X-Frame-Options).
+- **Interactive macOS Preview**: Lightweight vanilla JS demo showcasing live fuzzy search, category filtering, and instant copy swatches.
+- **SEO & Social Share Ready**: Auto-generated `sitemap-index.xml`, optimized `robots.txt`, OpenGraph SVG cards, and Schema.org JSON-LD structured data.

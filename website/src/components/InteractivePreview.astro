@@ -1,0 +1,378 @@
+---
+---
+
+<section id="preview" class="relative py-12 md:py-20 overflow-hidden">
+  <div class="max-w-5xl mx-auto px-6">
+    <!-- Section Title -->
+    <div class="text-center mb-10">
+      <span class="badge-pill mb-4 inline-flex">Live Interactive Demo</span>
+      <h2 class="text-3xl sm:text-4xl md:text-5xl font-extrabold tracking-tight text-white mb-4">
+        Try the ClipStruct interface <span class="gradient-text-accent">right here.</span>
+      </h2>
+      <p class="text-slate-400 max-w-xl mx-auto text-sm sm:text-base">
+        Experience the native floating search palette. Filter by category, search by app name, or click to copy real snippets.
+      </p>
+    </div>
+
+    <!-- macOS App Window Frame -->
+    <div class="relative mx-auto rounded-2xl p-1 bg-gradient-to-b from-white/15 via-white/5 to-white/0 shadow-2xl shadow-violet-950/40 glow-primary">
+      <div class="rounded-xl overflow-hidden bg-[#0c0b16]/95 backdrop-blur-2xl border border-white/10 text-slate-200">
+        <!-- macOS Window Titlebar -->
+        <div class="flex items-center justify-between px-4 py-3 bg-white/[0.03] border-b border-white/[0.06] select-none">
+          <div class="flex items-center gap-2">
+            <div class="w-3 h-3 rounded-full bg-[#ff5f56] border border-[#e0443e] cursor-pointer hover:opacity-80 transition-opacity"></div>
+            <div class="w-3 h-3 rounded-full bg-[#ffbd2e] border border-[#dea123] cursor-pointer hover:opacity-80 transition-opacity"></div>
+            <div class="w-3 h-3 rounded-full bg-[#27c93f] border border-[#1aab29] cursor-pointer hover:opacity-80 transition-opacity"></div>
+            <span class="ml-3 text-xs font-semibold text-slate-400 flex items-center gap-1.5">
+              <span class="w-2 h-2 rounded-full bg-violet-400"></span>
+              ClipStruct — Quick Palette
+            </span>
+          </div>
+
+          <div class="flex items-center gap-2">
+            <span class="text-[11px] font-mono text-slate-500 bg-white/[0.04] px-2 py-0.5 rounded border border-white/[0.06]">
+              500 Items in History
+            </span>
+          </div>
+        </div>
+
+        <!-- App Search & Filter Toolbar -->
+        <div class="p-4 sm:p-5 border-b border-white/[0.06] bg-white/[0.015] flex flex-col gap-3.5">
+          <!-- Live Search Bar -->
+          <div class="relative flex items-center">
+            <div class="absolute inset-y-0 left-0 pl-3.5 flex items-center pointer-events-none text-violet-400">
+              <svg class="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2.5">
+                <path stroke-linecap="round" stroke-linejoin="round" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z" />
+              </svg>
+            </div>
+            <input
+              id="demo-search-input"
+              type="text"
+              placeholder="Search clipboard or filter by app ('Xcode', 'Figma', 'Safari')..."
+              class="w-full pl-10 pr-24 py-2.5 bg-white/[0.05] hover:bg-white/[0.07] focus:bg-white/[0.08] focus:outline-none focus:ring-2 focus:ring-violet-500/50 border border-white/[0.08] rounded-xl text-sm text-white placeholder-slate-400 transition-all font-sans"
+            />
+            <div class="absolute inset-y-0 right-0 pr-3 flex items-center gap-1">
+              <button
+                id="demo-clear-btn"
+                class="hidden text-xs text-slate-400 hover:text-white p-1 rounded hover:bg-white/10"
+                title="Clear search"
+              >
+                ✕
+              </button>
+              <span class="kbd text-[10px]">⌘F</span>
+            </div>
+          </div>
+
+          <!-- Category Filter Pills -->
+          <div class="flex items-center gap-1.5 overflow-x-auto pb-1 sm:pb-0 text-xs no-scrollbar">
+            <button
+              class="filter-pill active px-3 py-1.5 rounded-lg font-medium transition-all duration-150 bg-violet-600 text-white shadow-sm shadow-violet-600/30"
+              data-category="all"
+            >
+              All Items
+            </button>
+            <button
+              class="filter-pill px-3 py-1.5 rounded-lg font-medium transition-all duration-150 bg-white/[0.04] text-slate-300 hover:bg-white/[0.08] hover:text-white border border-white/[0.06]"
+              data-category="code"
+            >
+              ⌨️ Code
+            </button>
+            <button
+              class="filter-pill px-3 py-1.5 rounded-lg font-medium transition-all duration-150 bg-white/[0.04] text-slate-300 hover:bg-white/[0.08] hover:text-white border border-white/[0.06]"
+              data-category="color"
+            >
+              🎨 Colors
+            </button>
+            <button
+              class="filter-pill px-3 py-1.5 rounded-lg font-medium transition-all duration-150 bg-white/[0.04] text-slate-300 hover:bg-white/[0.08] hover:text-white border border-white/[0.06]"
+              data-category="link"
+            >
+              🔗 Links
+            </button>
+            <button
+              class="filter-pill px-3 py-1.5 rounded-lg font-medium transition-all duration-150 bg-white/[0.04] text-slate-300 hover:bg-white/[0.08] hover:text-white border border-white/[0.06]"
+              data-category="image"
+            >
+              🖼️ Images
+            </button>
+            <button
+              class="filter-pill px-3 py-1.5 rounded-lg font-medium transition-all duration-150 bg-white/[0.04] text-slate-300 hover:bg-white/[0.08] hover:text-white border border-white/[0.06]"
+              data-category="text"
+            >
+              📝 Text
+            </button>
+          </div>
+        </div>
+
+        <!-- Clipboard Items List -->
+        <div id="demo-items-container" class="p-3 sm:p-4 flex flex-col gap-2.5 max-h-[460px] overflow-y-auto">
+          <!-- Item 1: Swift Code -->
+          <div
+            class="demo-item group relative p-3.5 rounded-xl bg-white/[0.03] hover:bg-white/[0.06] border border-white/[0.06] hover:border-violet-500/40 transition-all cursor-pointer"
+            data-category="code"
+            data-search="swift xcode clipstruct shared capturelatestpasteboard code function"
+          >
+            <div class="flex items-center justify-between mb-2">
+              <div class="flex items-center gap-2">
+                <span class="w-5 h-5 rounded bg-blue-500/20 text-blue-400 border border-blue-500/30 flex items-center justify-center text-[10px] font-bold">⌘</span>
+                <span class="text-xs font-semibold text-slate-300">Xcode</span>
+                <span class="text-[10px] text-slate-500">• Just now</span>
+              </div>
+              <div class="flex items-center gap-2">
+                <span class="text-[10px] font-mono px-1.5 py-0.5 rounded bg-amber-500/10 text-amber-300 border border-amber-500/20">Swift</span>
+                <button
+                  class="copy-trigger text-xs font-medium text-violet-300 group-hover:text-white bg-violet-600/20 hover:bg-violet-600/40 px-2 py-0.5 rounded border border-violet-500/30 transition-colors flex items-center gap-1"
+                  data-copy="let manager = ClipStruct.shared&#10;await manager.captureLatestPasteboard()"
+                >
+                  <svg class="w-3 h-3" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 16H6a2 2 0 01-2-2V6a2 2 0 012-2h8a2 2 0 012 2v2m-6 12h8a2 2 0 002-2v-8a2 2 0 00-2-2h-8a2 2 0 00-2 2v8a2 2 0 002 2z"/></svg>
+                  Copy
+                </button>
+              </div>
+            </div>
+            <pre class="text-xs font-mono text-slate-200 bg-black/40 p-2.5 rounded-lg border border-white/[0.04] overflow-x-auto"><span class="text-purple-400">let</span> manager = <span class="text-emerald-300">ClipStruct</span>.shared
+<span class="text-purple-400">await</span> manager.<span class="text-blue-300">captureLatestPasteboard</span>()</pre>
+          </div>
+
+          <!-- Item 2: Hex Colors -->
+          <div
+            class="demo-item group relative p-3.5 rounded-xl bg-white/[0.03] hover:bg-white/[0.06] border border-white/[0.06] hover:border-violet-500/40 transition-all cursor-pointer"
+            data-category="color"
+            data-search="color hex figma palette 8b5cf6 06b6d4 violet cyan purple"
+          >
+            <div class="flex items-center justify-between mb-2">
+              <div class="flex items-center gap-2">
+                <span class="w-5 h-5 rounded bg-pink-500/20 text-pink-400 border border-pink-500/30 flex items-center justify-center text-[10px] font-bold">✦</span>
+                <span class="text-xs font-semibold text-slate-300">Figma</span>
+                <span class="text-[10px] text-slate-500">• 2m ago</span>
+              </div>
+              <span class="text-[10px] font-mono px-1.5 py-0.5 rounded bg-purple-500/10 text-purple-300 border border-purple-500/20">Hex Swatches</span>
+            </div>
+            <div class="grid grid-cols-1 sm:grid-cols-2 gap-2">
+              <div
+                class="copy-trigger flex items-center justify-between p-2 rounded-lg bg-black/30 border border-white/[0.06] hover:border-violet-500/40 transition-all"
+                data-copy="#8B5CF6"
+              >
+                <div class="flex items-center gap-2.5">
+                  <div class="w-7 h-7 rounded-lg bg-[#8B5CF6] shadow-md shadow-[#8B5CF6]/30 border border-white/20"></div>
+                  <div>
+                    <div class="text-xs font-mono font-bold text-white">#8B5CF6</div>
+                    <div class="text-[10px] text-slate-400">Electric Violet</div>
+                  </div>
+                </div>
+                <span class="text-[10px] text-violet-300 bg-white/5 px-2 py-1 rounded">Click to copy</span>
+              </div>
+              <div
+                class="copy-trigger flex items-center justify-between p-2 rounded-lg bg-black/30 border border-white/[0.06] hover:border-cyan-500/40 transition-all"
+                data-copy="#06B6D4"
+              >
+                <div class="flex items-center gap-2.5">
+                  <div class="w-7 h-7 rounded-lg bg-[#06B6D4] shadow-md shadow-[#06B6D4]/30 border border-white/20"></div>
+                  <div>
+                    <div class="text-xs font-mono font-bold text-white">#06B6D4</div>
+                    <div class="text-[10px] text-slate-400">Cyan Glow</div>
+                  </div>
+                </div>
+                <span class="text-[10px] text-cyan-300 bg-white/5 px-2 py-1 rounded">Click to copy</span>
+              </div>
+            </div>
+          </div>
+
+          <!-- Item 3: Rich Link -->
+          <div
+            class="demo-item group relative p-3.5 rounded-xl bg-white/[0.03] hover:bg-white/[0.06] border border-white/[0.06] hover:border-violet-500/40 transition-all cursor-pointer"
+            data-category="link"
+            data-search="safari link apple developer nspasteboard url documentation"
+          >
+            <div class="flex items-center justify-between mb-2">
+              <div class="flex items-center gap-2">
+                <span class="w-5 h-5 rounded bg-sky-500/20 text-sky-400 border border-sky-500/30 flex items-center justify-center text-[10px] font-bold">🧭</span>
+                <span class="text-xs font-semibold text-slate-300">Safari</span>
+                <span class="text-[10px] text-slate-500">• 8m ago</span>
+              </div>
+              <button
+                class="copy-trigger text-xs font-medium text-violet-300 group-hover:text-white bg-violet-600/20 hover:bg-violet-600/40 px-2 py-0.5 rounded border border-violet-500/30 transition-colors flex items-center gap-1"
+                data-copy="https://developer.apple.com/documentation/appkit/nspasteboard"
+              >
+                Copy Link
+              </button>
+            </div>
+            <div class="flex items-start gap-3 p-2.5 rounded-lg bg-black/30 border border-white/[0.04]">
+              <div class="w-8 h-8 rounded-md bg-white/10 flex items-center justify-center shrink-0 text-white font-bold text-xs">
+                
+              </div>
+              <div class="flex-1 min-w-0">
+                <div class="text-xs font-semibold text-white truncate">Apple Developer Documentation — NSPasteboard</div>
+                <div class="text-[11px] text-slate-400 truncate mt-0.5">developer.apple.com/documentation/appkit/nspasteboard</div>
+                <div class="text-[11px] text-slate-500 line-clamp-1 mt-1">Direct system-level pasteboard event observation in Swift.</div>
+              </div>
+            </div>
+          </div>
+
+          <!-- Item 4: Formatted Text -->
+          <div
+            class="demo-item group relative p-3.5 rounded-xl bg-white/[0.03] hover:bg-white/[0.06] border border-white/[0.06] hover:border-violet-500/40 transition-all cursor-pointer"
+            data-category="text"
+            data-search="slack text message release v2.3 announcement team communication notes"
+          >
+            <div class="flex items-center justify-between mb-2">
+              <div class="flex items-center gap-2">
+                <span class="w-5 h-5 rounded bg-emerald-500/20 text-emerald-400 border border-emerald-500/30 flex items-center justify-center text-[10px] font-bold">💬</span>
+                <span class="text-xs font-semibold text-slate-300">Slack</span>
+                <span class="text-[10px] text-slate-500">• 15m ago</span>
+              </div>
+              <button
+                class="copy-trigger text-xs font-medium text-violet-300 group-hover:text-white bg-violet-600/20 hover:bg-violet-600/40 px-2 py-0.5 rounded border border-violet-500/30 transition-colors flex items-center gap-1"
+                data-copy="ClipStruct 2.3 is live! Pure native Swift, zero network requests, 100% on-device storage."
+              >
+                Copy Text
+              </button>
+            </div>
+            <p class="text-xs text-slate-300 leading-relaxed bg-black/30 p-2.5 rounded-lg border border-white/[0.04]">
+              &ldquo;ClipStruct 2.3 is live! Pure native Swift, zero network requests, 100% on-device storage.&rdquo;
+            </p>
+          </div>
+
+          <!-- Item 5: Screenshot/Image Preview -->
+          <div
+            class="demo-item group relative p-3.5 rounded-xl bg-white/[0.03] hover:bg-white/[0.06] border border-white/[0.06] hover:border-violet-500/40 transition-all cursor-pointer"
+            data-category="image"
+            data-search="screenshot image photo graphic macos preview 1920 1080 png"
+          >
+            <div class="flex items-center justify-between mb-2">
+              <div class="flex items-center gap-2">
+                <span class="w-5 h-5 rounded bg-indigo-500/20 text-indigo-400 border border-indigo-500/30 flex items-center justify-center text-[10px] font-bold">📸</span>
+                <span class="text-xs font-semibold text-slate-300">Screenshot</span>
+                <span class="text-[10px] text-slate-500">• 32m ago</span>
+              </div>
+              <span class="text-[10px] font-mono px-1.5 py-0.5 rounded bg-white/10 text-slate-300 border border-white/10">1920 × 1080 PNG</span>
+            </div>
+            <div class="relative h-24 rounded-lg bg-gradient-to-r from-violet-900/40 via-indigo-900/40 to-slate-900/40 border border-white/[0.06] flex items-center justify-center overflow-hidden">
+              <div class="flex items-center gap-2 text-xs text-slate-300">
+                <svg class="w-4 h-4 text-violet-400" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 16l4.586-4.586a2 2 0 012.828 0L16 16m-2-2l1.586-1.586a2 2 0 012.828 0L20 14m-6-6h.01M6 20h12a2 2 0 002-2V6a2 2 0 00-2-2H6a2 2 0 00-2 2v12a2 2 0 002 2z" />
+                </svg>
+                <span>Clipboard Thumbnail Generated Locally</span>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- No Results Empty State -->
+        <div id="demo-no-results" class="hidden py-12 px-4 text-center">
+          <div class="w-10 h-10 mx-auto rounded-full bg-white/[0.05] border border-white/10 flex items-center justify-center text-slate-400 mb-3">
+            🔍
+          </div>
+          <p class="text-sm font-semibold text-white mb-1">No items match your search</p>
+          <p class="text-xs text-slate-400 mb-3">Try searching for &quot;Xcode&quot;, &quot;Color&quot;, &quot;Safari&quot;, or reset filters.</p>
+          <button id="demo-reset-btn" class="btn-ghost !py-1 !px-3 text-xs">Reset Filters</button>
+        </div>
+
+        <!-- App Footer Shortcuts -->
+        <div class="px-4 py-2.5 bg-white/[0.02] border-t border-white/[0.06] flex flex-wrap items-center justify-between gap-2 text-[11px] text-slate-400 select-none">
+          <div class="flex items-center gap-3">
+            <span class="flex items-center gap-1"><span class="kbd text-[10px]">⏎</span> Paste</span>
+            <span class="flex items-center gap-1"><span class="kbd text-[10px]">⌘C</span> Copy</span>
+            <span class="flex items-center gap-1"><span class="kbd text-[10px]">⌫</span> Remove</span>
+          </div>
+          <div class="flex items-center gap-1.5 text-slate-500 font-mono text-[10px]">
+            <span>Swift 6.0</span> • <span>SwiftUI Native</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<script is:inline>
+  // Interactive Search & Category Filtering
+  const searchInput = document.getElementById('demo-search-input');
+  const clearBtn = document.getElementById('demo-clear-btn');
+  const filterPills = document.querySelectorAll('.filter-pill');
+  const demoItems = document.querySelectorAll('.demo-item');
+  const noResults = document.getElementById('demo-no-results');
+  const resetBtn = document.getElementById('demo-reset-btn');
+  const copyTriggers = document.querySelectorAll('.copy-trigger');
+
+  let activeCategory = 'all';
+
+  function filterItems() {
+    const query = (searchInput?.value || '').toLowerCase().trim();
+    if (clearBtn) {
+      if (query.length > 0) clearBtn.classList.remove('hidden');
+      else clearBtn.classList.add('hidden');
+    }
+
+    let matchCount = 0;
+
+    demoItems.forEach((item) => {
+      const category = item.getAttribute('data-category');
+      const searchData = item.getAttribute('data-search') || '';
+
+      const categoryMatch = activeCategory === 'all' || category === activeCategory;
+      const searchMatch = !query || searchData.includes(query);
+
+      if (categoryMatch && searchMatch) {
+        item.classList.remove('hidden');
+        matchCount++;
+      } else {
+        item.classList.add('hidden');
+      }
+    });
+
+    if (noResults) {
+      if (matchCount === 0) noResults.classList.remove('hidden');
+      else noResults.classList.add('hidden');
+    }
+  }
+
+  // Search input handler
+  searchInput?.addEventListener('input', filterItems);
+
+  clearBtn?.addEventListener('click', () => {
+    if (searchInput) searchInput.value = '';
+    filterItems();
+  });
+
+  resetBtn?.addEventListener('click', () => {
+    if (searchInput) searchInput.value = '';
+    activeCategory = 'all';
+    filterPills.forEach((p) => {
+      p.classList.remove('active', 'bg-violet-600', 'text-white', 'shadow-sm', 'shadow-violet-600/30');
+      p.classList.add('bg-white/[0.04]', 'text-slate-300', 'border', 'border-white/[0.06]');
+    });
+    filterPills[0]?.classList.add('active', 'bg-violet-600', 'text-white', 'shadow-sm', 'shadow-violet-600/30');
+    filterPills[0]?.classList.remove('bg-white/[0.04]', 'text-slate-300', 'border', 'border-white/[0.06]');
+    filterItems();
+  });
+
+  // Category pill handlers
+  filterPills.forEach((pill) => {
+    pill.addEventListener('click', () => {
+      filterPills.forEach((p) => {
+        p.classList.remove('active', 'bg-violet-600', 'text-white', 'shadow-sm', 'shadow-violet-600/30');
+        p.classList.add('bg-white/[0.04]', 'text-slate-300', 'border', 'border-white/[0.06]');
+      });
+      pill.classList.add('active', 'bg-violet-600', 'text-white', 'shadow-sm', 'shadow-violet-600/30');
+      pill.classList.remove('bg-white/[0.04]', 'text-slate-300', 'border', 'border-white/[0.06]');
+
+      activeCategory = pill.getAttribute('data-category') || 'all';
+      filterItems();
+    });
+  });
+
+  // Copy trigger handler
+  copyTriggers.forEach((trigger) => {
+    trigger.addEventListener('click', (e) => {
+      e.stopPropagation();
+      const text = trigger.getAttribute('data-copy');
+      if (text) {
+        navigator.clipboard.writeText(text).then(() => {
+          if (window.showToast) {
+            window.showToast(`Copied to clipboard: "${text.length > 25 ? text.substring(0, 25) + '...' : text}"`);
+          }
+        });
+      }
+    });
+  });
+</script>
+
