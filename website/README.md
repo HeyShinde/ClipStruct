@@ -39,9 +39,8 @@ npm run preview
 2. Select the `ClipStruct` repository.
 3. Configure build settings:
    - **Framework preset**: `Astro`
-   - **Build command**: `cd website && npm run build` (or set Root Directory to `website` with build command `npm run build`)
-   - **Build output directory**: `dist` (or `website/dist` if root dir is repository root)
-   - **Environment variables**: `NODE_VERSION`: `20` (or `22`)
+   - **Build command**: `npm run build` (with Root Directory set to `website`)
+   - **Build output directory**: `dist`
 4. Click **Save and Deploy**.
 
 ### Option B: Cloudflare Wrangler CLI
