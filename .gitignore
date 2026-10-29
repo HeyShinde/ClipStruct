@@ -7,6 +7,8 @@
 build/
 DerivedData/
 *.xcuserdata
+xcuserdata/
+**/xcuserdata/
 *.xcworkspace/xcuserdata/
 *.pbxuser
 *.mode1v3
@@ -20,11 +22,11 @@ DerivedData/
 .idea/
 .vscode/
 
-# Website (Next.js) - paths relative to website/
+# Website (Astro & Cloudflare)
 website/node_modules/
-website/.next/
-website/out/
-website/.vercel
+website/dist/
+website/.astro/
+website/.wrangler/
+website/.vercel/
 website/.env*
 website/*.tsbuildinfo
-website/next-env.d.ts

@@ -1,4 +1,5 @@
 import SwiftUI
+import KeyboardShortcuts
 
 struct PreferencesView: View {
     @EnvironmentObject var preferencesManager: PreferencesManager
@@ -30,6 +31,23 @@ struct PreferencesView: View {
             
             // Content
             VStack(alignment: .leading, spacing: 20) {
+                // Global Toggle Shortcut
+                VStack(alignment: .leading, spacing: 6) {
+                    HStack {
+                        Text("Toggle Palette Shortcut")
+                            .font(.body)
+                        Spacer()
+                        KeyboardShortcuts.Recorder(for: .toggleClipboard)
+                    }
+                    
+                    Text("Global keyboard shortcut to open or close the ClipStruct palette from any app.")
+                        .font(.caption)
+                        .foregroundColor(.secondary)
+                        .fixedSize(horizontal: false, vertical: true)
+                }
+                
+                Divider()
+
                 // Launch at Login
                 VStack(alignment: .leading, spacing: 6) {
                     Toggle("Launch at Login", isOn: Binding(

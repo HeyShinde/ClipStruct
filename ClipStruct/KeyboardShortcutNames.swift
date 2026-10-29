@@ -1,7 +1,7 @@
 import KeyboardShortcuts
 
 extension KeyboardShortcuts.Name {
-    static let toggleClipboard = Self("toggleClipboard", default: .init(.c, modifiers: [.command, .shift]))
+    static let toggleClipboard = Self("toggleClipboard", default: .init(.v, modifiers: [.command, .shift]))
     static let copyItem1 = Self("copyItem1", default: .init(.one, modifiers: [.command]))
     static let copyItem2 = Self("copyItem2", default: .init(.two, modifiers: [.command]))
     static let copyItem3 = Self("copyItem3", default: .init(.three, modifiers: [.command]))
